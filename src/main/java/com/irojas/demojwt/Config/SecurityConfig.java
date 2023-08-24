@@ -13,20 +13,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.irojas.demojwt.Jwt.JwtAuthenticationFilter;
 
 
-//import lombok.RequiredArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class SecurityConfig {
 
        
-    @Autowired
-    JwtAuthenticationFilter jwtAuthenticationFilter;
+//    @Autowired
+//    JwtAuthenticationFilter jwtAuthenticationFilter;
     //private final JwtAuthenticationFilter jwtAuthenticationFilter;
     
-    @Autowired
-    AuthenticationProvider authProvider;
+//    @Autowired
+//    AuthenticationProvider authProvider;
     //private final AuthenticationProvider authProvider;
 
     @Bean
@@ -41,11 +41,7 @@ public class SecurityConfig {
                 .requestMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated()
                 )
-            .sessionManagement(sessionManager->
-                sessionManager 
-                  .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authenticationProvider(authProvider)
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+            .formLogin(withDefaults())
             .build();
             
             
