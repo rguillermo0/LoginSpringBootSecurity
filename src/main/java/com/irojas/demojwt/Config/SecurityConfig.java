@@ -40,11 +40,23 @@ public class SecurityConfig {
               authRequest
                 .requestMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated()
-                )
-            .formLogin(withDefaults())
-            .build();
+                .and()
+            .formLogin()
+            .loginPage("/loginApp")
+            .permitAll()
+            .usernameParameter("username")
+            .passwordParameter("password")
+            .and()
+         .logout()
+            .permitAll()
+            .logoutSuccessUrl("/login?logout");
             
             
-    }
+            //.formLogin(withDefaults())
+            //.build();
+            
+            
+            
+    
 
 }
